@@ -37,11 +37,16 @@ exports.getProducts = async (req, res) => {
 
 // Add Products
 exports.addproduct = async (req, res) => {
+  const { productname, category, description, price } = req.body;
   try {
-    res.status(201).json({success:true,message:"add product admin"})
+    //const product = await Product.create({ productname,category, description, price });
+    const product = new Product({ productname, category, description, price });
+    product.save();
+    res.status(201).json({ success: true, message: "Product Created" })
   } catch (error) {
     errorHandler(error, req, res);
   }
+
 }
 
 
